@@ -5,7 +5,7 @@ Created on Tue Aug 27 19:56:16 2019
 @author: deepb
 """
 
-class person:
+class Person:
     def __init__(self, name: str, languages: str, social: int, gender: int, gender_preference: int,\
                  time: int, year: int, landmark: int, inside: int, outside: int,\
                  go_out: int, travel: int, sports: int, close: int):

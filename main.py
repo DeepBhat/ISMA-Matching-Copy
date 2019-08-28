@@ -14,7 +14,7 @@ Created on Tue Aug 27 16:17:44 2019
 
 import pandas as pd
 import numpy as np
-from person import person
+from person import Person
 
 
 if __name__ ==  '__main__':
@@ -26,8 +26,8 @@ if __name__ ==  '__main__':
     mentees_df = pd.read_excel(mentees_file)
     mentors_df = pd.read_excel(mentors_file)
     
-    mentees = []
-    mentors = []
+    mentees = [None for i in range(mentees_df.shape[0])]
+    mentors = [None for i in range(mentors_df.shape[0])]
     
     # Data Preprocessing
     
@@ -67,7 +67,27 @@ if __name__ ==  '__main__':
     mentees_df.replace(codes, inplace = True)
     mentors_df.replace(codes, inplace = True)
     
-    # 
+    # Initializing objects
+    for i, row in enumerate(mentees_df.values):
+        name, languages, social, gender, gender_preference, time, year,\
+        landmark, inside, outside, go_out, travel, sports, close = row
+        
+        mentees[i] = Person(name, languages, social, gender, gender_preference, time, year,
+                           landmark, inside, outside, go_out, travel, sports, close)
+        
+# ===============Fix the data types of mentors first=====================
+#        
+#     for i, row in enumerate(mentors_df.values):
+#         name, languages, social, gender, gender_preference, time, year,\
+#         landmark, inside, outside, go_out, travel, sports, close = row
+#         
+#         mentors[i] = Person(name, languages, social, gender, gender_preference, time, year,
+#                            landmark, inside, outside, go_out, travel, sports, close)
+# =============================================================================
+        
+        
+    
+        
     
     
     
