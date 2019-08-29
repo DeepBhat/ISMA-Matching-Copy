@@ -8,6 +8,7 @@ Created on Tue Aug 27 16:17:44 2019
 # TO DO:
 # 1. correct the encoding for nearest landmark
 # 2. fix mentor data types
+# 3. drop na
 # =============================================================================
 
 
@@ -77,15 +78,54 @@ if __name__ ==  '__main__':
         
 # ===============Fix the data types of mentors first=====================
 #        
-#     for i, row in enumerate(mentors_df.values):
-#         name, languages, social, gender, gender_preference, time, year,\
-#         landmark, inside, outside, go_out, travel, sports, close = row
-#         
-#         mentors[i] = Person(name, languages, social, gender, gender_preference, time, year,
-#                            landmark, inside, outside, go_out, travel, sports, close)
-# =============================================================================
+    for i, row in enumerate(mentors_df.values):
+         name, languages, social, gender, gender_preference, time, year,\
+         landmark, inside, outside, go_out, travel, sports, close = row
+         
+         mentors[i] = Person(name, languages, social, gender, gender_preference, time, year,
+                            landmark, inside, outside, go_out, travel, sports, close)
+
         
-        
+    final_score_df = pd.DataFrame(columns = [mentee.name for mentee in mentees], index = [mentor.name for mentor in mentors])
+    
+    for mentor in mentors:
+        for mentee in mentees:
+            # Introversion/Extroversion
+            social_score = mentor.social * mentee.social + 4
+            
+            # class year
+            year_score = mentor.year * mentee.year + 6
+            
+            # stay inside
+            inside_score = mentor.inside * mentee.inside + 4
+            
+            # stay outside
+            outside_score = mentor.outside * mentee.outside + 4
+            
+            #  go_out
+            go_out_score = mentor.go_out * mentee.go_out + 4
+            
+            #  travel
+            travel_score = mentor.travel * mentee.travel + 4
+            
+            #  sports
+            sports_score = mentor.sports * mentee.sports + 4
+            
+            # close
+            close_score = mentor.close * mentee.close + 4
+            
+            final_score_df.loc[mentee.name, mentor.name] = social_score + year_score + inside_score +\
+                                                       outside_score + go_out_score + travel_score +\
+                                                       sports_score + close_score
+                                                       
+
+
+    
+            
+            
+            
+            
+            
     
         
     
