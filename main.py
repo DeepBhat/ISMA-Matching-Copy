@@ -25,7 +25,7 @@ if __name__ ==  '__main__':
     
     # importing the dataframe
     mentees_df = pd.read_excel(mentees_file)
-    mentors_df = pd.read_excel(mentors_file)
+    mentors_df = pd.read_excel(mentors_file, nrows = 4)
     
     mentees = [None for i in range(mentees_df.shape[0])]
     mentors = [None for i in range(mentors_df.shape[0])]
@@ -67,6 +67,21 @@ if __name__ ==  '__main__':
 
     mentees_df.replace(codes, inplace = True)
     mentors_df.replace(codes, inplace = True)
+    
+    # Scaling values
+    mentors_df["Do you like to stay inside (hanging out, reading, watching TV/movies, playing video games etc.)?"] -= 3
+    mentors_df["Do you like to be outside (playing sports, exercising, running, hiking etc.)?"] -= 3
+    mentors_df["Do you like to go out and be social (hanging out with friends, going to parties, etc.)? "] -= 3
+    mentors_df["How much would you like to travel outside of College Station this semester?"] -= 3
+    mentors_df["Do you like going to sports games?"] -= 3
+    
+    mentees_df["Do you like to stay inside (hanging out, reading, watching TV/movies, playing video games etc.)?"] -= 3
+    mentees_df["Do you like to be outside (playing sports, exercising, running, hiking etc.)?"] -= 3
+    mentees_df["Do you like to go out and be social (hanging out with friends, going to parties, etc.)? "] -= 3
+    mentees_df["How much would you like to travel outside of College Station this semester?"] -= 3
+    mentees_df["Do you like going to sports games?"] -= 3
+    
+    
     
     # Initializing objects
     for i, row in enumerate(mentees_df.values):
@@ -114,7 +129,7 @@ if __name__ ==  '__main__':
             # close
             close_score = mentor.close * mentee.close + 4
             
-            final_score_df.loc[mentee.name, mentor.name] = social_score + year_score + inside_score +\
+            final_score_df.loc[mentor.name, mentee.name] = social_score + year_score + inside_score +\
                                                        outside_score + go_out_score + travel_score +\
                                                        sports_score + close_score
                                                        
