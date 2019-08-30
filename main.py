@@ -141,9 +141,19 @@ if __name__ ==  '__main__':
             # distance
             distance_score = distance_scores[mentor.landmark][mentee.landmark]
             
-            scores_df.loc[mentor.name, mentee.name] = social_score + year_score + inside_score +\
-                                                       outside_score + go_out_score + travel_score +\
-                                                       sports_score + close_score + distance_score
+            # Boolean flags
+            if (mentee.gender_preference or mentor.gender_preference) and mentor.gender != mentee.gender:
+                total_score = 0
+            elif mentee.time + mentor.time == 1:
+                total_score = 0
+            else:
+                total_score = social_score + year_score + inside_score + outside_score + go_out_score\
+                               + travel_score + sports_score + close_score + distance_score
+                             
+            scores_df.loc[mentor.name, mentee.name] = total_score
+            
+            
+                
                                                        
 
 
