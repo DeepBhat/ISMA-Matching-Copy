@@ -151,8 +151,18 @@ if __name__ ==  '__main__':
                 total_score = social_score + year_score + inside_score + outside_score + go_out_score\
                                + travel_score + sports_score + close_score + distance_score
                              
-            scores_df.loc[mentor.name, mentee.name] = total_score
+            scores_df.loc[mentor.name, mentee.name] = int(total_score)
             
+    # Getting the closest match
+    closest_df = pd.DataFrame(columns = ["Mentee", "Score"], index = [mentor.name for mentor in mentors])
+    closest_df["Mentee"] = scores_df.idxmax(axis=1)
+    closest_df["Score"] = scores_df.max(axis=1)
+    
+    # Exporting the dataframes
+    
+    
+    
+    
             
                 
                                                        
