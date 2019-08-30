@@ -159,7 +159,10 @@ if __name__ ==  '__main__':
     closest_df["Score"] = scores_df.max(axis=1)
     
     # Exporting the dataframes
-    
+    writer = pd.ExcelWriter("scores.xlsx")
+    scores_df.to_excel(writer, sheet_name = 'Scores')
+    closest_df.to_excel(writer, sheet_name = 'Match')
+    writer.save()
     
     
     
