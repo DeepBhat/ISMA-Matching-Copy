@@ -6,8 +6,7 @@ Created on Tue Aug 27 16:17:44 2019
 """
 # =============================================================================
 # TO DO:
-# 1. correct the encoding for nearest landmark
-# 3. drop na
+# 1. drop na
 # =============================================================================
 
 
@@ -23,15 +22,17 @@ if __name__ ==  '__main__':
     
     # importing the dataframe
     mentees_df = pd.read_excel(mentees_file)
-    mentors_df = pd.read_excel(mentors_file, nrows = 4)
+    mentors_df = pd.read_excel(mentors_file)
     
+    # Cleaning nan values
+    mentees_df.dropna(subset = ["Name", "Gender"], inplace = True)
+    mentors_df.dropna(subset = ["Name", "Gender"], inplace = True)
+    
+    # Initializing list of objects
     mentees = [None for i in range(mentees_df.shape[0])]
     mentors = [None for i in range(mentors_df.shape[0])]
     
     # Data Preprocessing
-    
-    # Cleaning nan values
-    
     
     # Encoding categorical values
     codes = {"Do you identify more as an introvert or an extrovert?" : {"Introvert" : -1, 
