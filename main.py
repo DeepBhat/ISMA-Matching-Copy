@@ -4,10 +4,6 @@ Created on Tue Aug 27 16:17:44 2019
 
 @author: deepb
 """
-# =============================================================================
-# TO DO:
-# 1. drop na
-# =============================================================================
 
 
 
@@ -163,6 +159,10 @@ if __name__ ==  '__main__':
     scores_df.to_excel(writer, sheet_name = 'Scores')
     closest_df.to_excel(writer, sheet_name = 'Match')
     writer.save()
+    
+    
+    
+    
     
     
     

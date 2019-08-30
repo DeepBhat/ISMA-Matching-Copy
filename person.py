@@ -27,4 +27,16 @@ class Person:
         self.sports = sports # watch sports
         self.close = close # how close to mentor
         
+        self.getLanguages()
+    
+    def getLanguages(self):
+        import re
+        self.languages = "".join(char.lower() for char in str(self.languages) if char.isalnum() or char.isspace())
+        language_list = re.split('\s| and |,', self.languages)
+        language_list = [item for item in language_list if item not in ('nan', 'and', '', 'of', 'bit',
+                                                                        'little', 'language', 'languages')\
+                         and len(item) > 1] 
+        print(language_list)
+        
+        
     
