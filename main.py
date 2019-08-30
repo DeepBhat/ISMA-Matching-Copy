@@ -138,6 +138,10 @@ if __name__ ==  '__main__':
             # distance
             distance_score = distance_scores[mentor.landmark][mentee.landmark]
             
+            # language
+            common_languages= [language for language in mentee.languages if language in mentor.languages]
+            language_score = 10 if (len(common_languages) > 0) else 0
+            
             # Boolean flags
             if (mentee.gender_preference or mentor.gender_preference) and mentor.gender != mentee.gender:
                 total_score = 0
@@ -145,7 +149,7 @@ if __name__ ==  '__main__':
                 total_score = 0
             else:
                 total_score = social_score + year_score + inside_score + outside_score + go_out_score\
-                               + travel_score + sports_score + close_score + distance_score
+                               + travel_score + sports_score + close_score + distance_score + language_score
                              
             scores_df.loc[mentor.name, mentee.name] = int(total_score)
             

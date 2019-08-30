@@ -36,7 +36,7 @@ class Person:
         language_list = [item for item in language_list if item not in ('nan', 'and', '', 'of', 'bit',
                                                                         'little', 'language', 'languages')\
                          and len(item) > 1] 
-        print(language_list)
+        self.languages = language_list
         
         
     
